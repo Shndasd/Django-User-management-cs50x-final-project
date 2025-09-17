@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Management</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: sans-serif;
+    }
+    a { color: #66ccff; text-decoration: none; margin: 0 10px; }
+    nav { background: #1e1e1e; padding: 10px; }
+  </style>
+</head>
+<body>
+  <nav>
+    {% if user.is_authenticated %}
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
+    {% else %}
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'signup' %}">Signup</a>
+    {% endif %}
+  </nav>
+  <div>
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>
